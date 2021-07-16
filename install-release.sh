@@ -533,9 +533,6 @@ install_xray() {
          "path": ["/"],
          "headers": {
          "Host": ["ltewap.tv189.com","cloud.189.cn","open.4g.play.cn","dl.music.189.cn"],
-         "User-Agent": ["Mozilla/5.0 (Linux; Android 5.1.1; SM-J330G Build/LMY48Z) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Safari/537.36"],
-         "Accept-Encoding": ["gzip, deflate"],
-         "Connection": ["keep-alive"]
                         }
                     }
                 }

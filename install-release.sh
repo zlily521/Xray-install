@@ -503,53 +503,7 @@ install_xray() {
   # shellcheck disable=SC2153
   if [[ -z "$JSONS_PATH" ]] && [[ ! -d "$JSON_PATH" ]]; then
     install -d "$JSON_PATH"
-    echo "{
-  "log": {
-    "access": "/var/log/v2ray/access.log",
-    "error": "/var/log/v2ray/error.log",
-    "loglevel": "info"
-  },
-    "inbound": {
-    "port": 80,
-    "protocol": "vmess",
-    "settings": {
-      "udp": true,
-      "clients": [
-        {
-          "id": "c87d3548-3a3b-4084-93b3-1477cf362828",
-          "level": 1,
-          "alterId": 32
-        }
-      ]
-    },
-        "streamSettings": {
-        "network": "tcp",
-        "tcpSettings": {
-         "header": {
-         "type": "http",
-         "request": {
-         "version": "1.1",
-         "method": "GET",
-         "path": ["/"],
-         "headers": {
-         "Host": ["ltewap.tv189.com","cloud.189.cn","open.4g.play.cn","dl.music.189.cn"],
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "outbound": {
-        "protocol": "freedom",
-        "settings": {}
-    },
-  "dns": {
-    "servers": [
-      "168.95.1.1",
-      "localhost"
-    ]
-  }
-}" > "${JSON_PATH}/config.json"
+    echo "{}" > "${JSON_PATH}/config.json"
     CONFIG_NEW='1'
   fi
 

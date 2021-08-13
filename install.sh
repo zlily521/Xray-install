@@ -504,7 +504,7 @@ install_xray() {
   if [[ -z "$JSONS_PATH" ]] && [[ ! -d "$JSON_PATH" ]]; then
     install -d "$JSON_PATH"
     cat > "${JSON_PATH}/config.json" <<EOF
-    {
+ {
     "log": {
         "loglevel": "warning"
     },
@@ -575,7 +575,7 @@ EOF
     install -d "$JSONS_PATH"
     for BASE in 00_log 01_api 02_dns 03_routing 04_policy 05_inbounds 06_outbounds 07_transport 08_stats 09_reverse; do
       cat > "${JSON_PATH}/config.json" <<EOF
-    {
+{
     "log": {
         "loglevel": "warning"
     },

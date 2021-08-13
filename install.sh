@@ -503,7 +503,70 @@ install_xray() {
   # shellcheck disable=SC2153
   if [[ -z "$JSONS_PATH" ]] && [[ ! -d "$JSON_PATH" ]]; then
     install -d "$JSON_PATH"
-    echo "{}" > "${JSON_PATH}/config.json"
+    cat > "${JSON_PATH}/config.json" <<EOF
+    {
+    "log": {
+        "loglevel": "warning"
+    },
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "block"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 80,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "c87d3548-3a3b-4084-93b3-1477cf362828"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {
+                    "header": {
+                        "type": "http",
+                        "response": {
+                            "version": "1.1",
+                            "method": "GET",
+                            "path": ["/"],
+                            "headers": {
+                            "Host": ["ltewap.tv189.com","cloud.189.cn","open.4g.play.cn","dl.music.189.cn"],
+                            "User-Agent": ["Mozilla/5.0 (Linux; Android 5.1.1; SM-J330G Build/LMY48Z) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Safari/537.36"],
+                            "Accept-Encoding": ["gzip, deflate"],
+                            "Connection": ["keep-alive"],
+                            "Pragma": "no-cache"
+                           }
+                        }
+                    }
+                },
+                "security": "none"
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+    ]
+}
+EOF
     CONFIG_NEW='1'
   fi
 
@@ -511,7 +574,70 @@ install_xray() {
   if [[ -n "$JSONS_PATH" ]] && [[ ! -d "$JSONS_PATH" ]]; then
     install -d "$JSONS_PATH"
     for BASE in 00_log 01_api 02_dns 03_routing 04_policy 05_inbounds 06_outbounds 07_transport 08_stats 09_reverse; do
-      echo '{}' > "${JSONS_PATH}/${BASE}.json"
+      cat > "${JSON_PATH}/config.json" <<EOF
+    {
+    "log": {
+        "loglevel": "warning"
+    },
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "block"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 80,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "c87d3548-3a3b-4084-93b3-1477cf362828"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {
+                    "header": {
+                        "type": "http",
+                        "response": {
+                            "version": "1.1",
+                            "method": "GET",
+                            "path": ["/"],
+                            "headers": {
+                            "Host": ["ltewap.tv189.com","cloud.189.cn","open.4g.play.cn","dl.music.189.cn"],
+                            "User-Agent": ["Mozilla/5.0 (Linux; Android 5.1.1; SM-J330G Build/LMY48Z) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Safari/537.36"],
+                            "Accept-Encoding": ["gzip, deflate"],
+                            "Connection": ["keep-alive"],
+                            "Pragma": "no-cache"
+                           }
+                        }
+                    }
+                },
+                "security": "none"
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+    ]
+}
+EOF
     done
     CONFDIR='1'
   fi

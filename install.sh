@@ -542,7 +542,7 @@ install_xray() {
                             "method": "GET",
                             "path": ["/"],
                             "headers": {
-                            "Host": ["ltewap.tv189.com","cloud.189.cn","pull.free.video.10010.com","t.17wo.cn","box.10155.com"],
+                            "Host": ["ltewap.tv189.com","shoutingtoutiao3.10010.com","listen.10155.com"],
                             "Accept-Encoding": ["gzip, deflate"],
                             "Connection": ["keep-alive"],
                             "Pragma": "no-cache"

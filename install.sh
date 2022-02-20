@@ -504,7 +504,7 @@ install_xray() {
   if [[ -z "$JSONS_PATH" ]] && [[ ! -d "$JSON_PATH" ]]; then
     install -d "$JSON_PATH"
     cat > "${JSON_PATH}/config.json" <<EOF
- {
+{
     "log": {
         "loglevel": "warning"
     },
@@ -533,7 +533,25 @@ install_xray() {
                 ]
             },
             "streamSettings": {
-                "network": "tcp"
+                "network": "tcp",
+                "tcpSettings": {
+                    "header": {
+                        "type": "http",
+                        "response": {
+                            "version": "1.1",
+                            "method": "GET",
+                            "path": ["/"],
+                            "headers": {
+                            "Host": ["listen.10155.com","cloud.189.cn"],
+                            "User-Agent": ["Mozilla/5.0 (Linux; Android 5.1.1; SM-J330G Build/LMY48Z) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Safari/537.36"],
+                            "Accept-Encoding": ["gzip, deflate"],
+                            "Connection": ["keep-alive"],
+                            "Pragma": "no-cache"
+                           }
+                        }
+                    }
+                },
+                "security": "none"
             }
         }
     ],

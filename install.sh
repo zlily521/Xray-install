@@ -533,24 +533,7 @@ install_xray() {
                 ]
             },
             "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {
-                    "header": {
-                        "type": "http",
-                        "response": {
-                            "version": "1.1",
-                            "method": "GET",
-                            "path": ["/"],
-                            "headers": {
-                            "Host": ["ltewap.tv189.com","shoutingtoutiao3.10010.com","listen.10155.com"],
-                            "Accept-Encoding": ["gzip, deflate"],
-                            "Connection": ["keep-alive"],
-                            "Pragma": "no-cache"
-                           }
-                        }
-                    }
-                },
-                "security": "none"
+                "network": "tcp"
             }
         }
     ],

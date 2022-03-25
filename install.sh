@@ -505,66 +505,21 @@ install_xray() {
     install -d "$JSON_PATH"
     cat > "${JSON_PATH}/config.json" <<EOF
 {
-    "log": {
-        "loglevel": "warning"
-    },
-    "routing": {
-        "domainStrategy": "AsIs",
-        "rules": [
-            {
-                "type": "field",
-                "ip": [
-                    "geoip:private"
-                ],
-                "outboundTag": "block"
-            }
-        ]
-    },
-    "inbounds": [
+  "inbounds": [{
+    "port": 80,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
         {
-            "listen": "0.0.0.0",
-            "port": 80,
-            "protocol": "vmess",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "c87d3548-3a3b-4084-93b3-1477cf362828"
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {
-                    "header": {
-                        "type": "http",
-                        "response": {
-                            "version": "1.1",
-                            "method": "GET",
-                            "path": ["/"],
-                            "headers": {
-                            "Host": ["listen.10155.com","cloud.189.cn"],
-                            "User-Agent": ["Mozilla/5.0 (Linux; Android 5.1.1; SM-J330G Build/LMY48Z) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Safari/537.36"],
-                            "Accept-Encoding": ["gzip, deflate"],
-                            "Connection": ["keep-alive"],
-                            "Pragma": "no-cache"
-                           }
-                        }
-                    }
-                },
-                "security": "none"
-            }
+          "id": "c87d3548-3a3b-4084-93b3-1477cf362828"
         }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct"
-        },
-        {
-            "protocol": "blackhole",
-            "tag": "block"
-        }
-    ]
+      ]
+    }
+  }],
+  "outbounds": [{
+    "protocol": "freedom",
+    "settings": {}
+  }]
 }
 EOF
     CONFIG_NEW='1'
@@ -576,66 +531,21 @@ EOF
     for BASE in 00_log 01_api 02_dns 03_routing 04_policy 05_inbounds 06_outbounds 07_transport 08_stats 09_reverse; do
       cat > "${JSON_PATH}/config.json" <<EOF
 {
-    "log": {
-        "loglevel": "warning"
-    },
-    "routing": {
-        "domainStrategy": "AsIs",
-        "rules": [
-            {
-                "type": "field",
-                "ip": [
-                    "geoip:private"
-                ],
-                "outboundTag": "block"
-            }
-        ]
-    },
-    "inbounds": [
+  "inbounds": [{
+    "port": 80,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
         {
-            "listen": "0.0.0.0",
-            "port": 80,
-            "protocol": "vmess",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "c87d3548-3a3b-4084-93b3-1477cf362828"
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {
-                    "header": {
-                        "type": "http",
-                        "response": {
-                            "version": "1.1",
-                            "method": "GET",
-                            "path": ["/"],
-                            "headers": {
-                            "Host": ["ltewap.tv189.com","cloud.189.cn","open.4g.play.cn","dl.music.189.cn"],
-                            "User-Agent": ["Mozilla/5.0 (Linux; Android 5.1.1; SM-J330G Build/LMY48Z) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Safari/537.36"],
-                            "Accept-Encoding": ["gzip, deflate"],
-                            "Connection": ["keep-alive"],
-                            "Pragma": "no-cache"
-                           }
-                        }
-                    }
-                },
-                "security": "none"
-            }
+          "id": "c87d3548-3a3b-4084-93b3-1477cf362828"
         }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct"
-        },
-        {
-            "protocol": "blackhole",
-            "tag": "block"
-        }
-    ]
+      ]
+    }
+  }],
+  "outbounds": [{
+    "protocol": "freedom",
+    "settings": {}
+  }]
 }
 EOF
     done
